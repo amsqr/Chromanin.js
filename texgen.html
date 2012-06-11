@@ -1,145 +1,67 @@
-<html>
-<head>
-<script src="TextureGenerator.js"></script>
-<script>
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Loading, please wait</title>
 
-/*
+    <script type="text/javascript">
+        var i=0;
+ 	var res=0;
+		var context;
+		var sizex;
+		var sizey;
+		var total_width;
+		
+        window.onload = function() {
+            var elem = document.getElementById('myCanvas');
+            if (!elem || !elem.getContext) {
+                return;
+            }
+			sizex=elem.width;
+			sizey=elem.height;
+			total_width=sizex-(2*sizex/10);
+            context = elem.getContext('2d');
+            if (!context) {
+                return;
+            }
+			
+			
+			context.fillStyle   = '#000';
+			context.strokeStyle = '#fff';
+			context.fillRect(0,0,sizex,sizey);
+			context.lineWidth  = 3;
+			context.fill();
+			
+			draw();
+            res = setInterval(draw, 30);
+        }
 
- Chromanin 
- 
- Copyright (C) 2012 Alejandro Mosquera <amsqr2@gmail.com>
- 
- This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, version 3 of the License.
- 
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
- 
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+        function draw() {
+            i+=1;
+            rectangle(i)
+			
+			if (i>=total_width) {
+                clearInterval(res);
+            }
+            }
+        
 
-*/
+		function rectangle(i)
+		{
+		context.fillStyle = "white";
+		context.beginPath();
+		context.rect(sizex/10, ((sizey+(sizey/15))/2)-(sizey/15), 1+i, sizey/15);
+		context.closePath();
+		context.fill()
+		}
+    </script>
 
-
-
-</script>
 </head>
 <body>
-<br> Chromanin - 
- 
- by Alejandro Mosquera <a href="http://amsqr.blogspot.com">  (http://amsqr.blogspot.com)</a></br>
- 
-<br> DEMO</br>
-<canvas id="canvas1" width="256" height="256"></canvas>
-<canvas id="canvas2" width="256" height="256"></canvas>
-<canvas id="canvas3" width="256" height="256"></canvas>
-<canvas id="canvas4" width="256" height="256"></canvas>
-<canvas id="canvas5" width="256" height="256"></canvas>
-<canvas id="canvas6" width="256" height="256"></canvas>
+   
+    <p>
+        <canvas id="myCanvas" width="800" height="600">Your browser does not have support for canvas.</canvas>
+    </p>
 
 
 
-
-
-<script>
-ch = new Chromanin(256,'canvas1');
-ch.initlayers(256,256);
-ch.colorLayer(0,255,0,0);
-ch.cellMachine(1,1234,99);
-ch.kaleidLayer(1,1,1);
-ch.tileLayer(1,1);
-ch.tileLayer(1,1);
-ch.tileLayer(1,1);
-ch.addLayers(0,1,4,1,1);
-ch.writeCanvas();
-
-
-ch = new Chromanin(256,'canvas2');
-ch.initlayers(256,256);
-ch.checkerBoardLayer(0,10,10,0,0,0,0,128,255);
-ch.blurLayer(0,0);
-ch.sineDistort(0,0,0.100000001490116,25,0.125,20);
-ch.embossLayer(0,0);
-ch.invertLayer(0,0);
-ch.perlinNoise(1,16,1935794432,128,140,6,false);
-ch.addLayers(0,1,4,1,0.400000005960464);
-ch.addLayers(4,2,4,1,1);
-ch.writeCanvas();
-
-
-ch = new Chromanin(256,'canvas3');
-ch.initlayers(256,256);
-ch.perlinNoise(0,128,9876543,256,150,8,true);
-ch.noiseDistort(0,0,1234567,3);
-ch.embossLayer(0,0);
-ch.perlinNoise(1,128,885870016,256,118,8,true);
-ch.scaleLayerRGB(1,1,0.5,0.6,0);
-ch.dilateLayer(1,1);
-ch.dilateLayer(1,1);
-ch.dilateLayer(1,1);
-ch.dilateLayer(1,1);
-ch.dilateLayer(1,1);
-ch.motionBlur(1,1,58);
-ch.perlinNoise(2,128,6666666,256,130,8,false);
-ch.embossLayer(2,2);
-ch.sculptureLayer(2,2);
-ch.mulLayers(0,1,4,1,1);
-ch.addLayers(4,2,4,1,0.0700000002980232);
-ch.writeCanvas();
-
-
-
-ch = new Chromanin(256,'canvas4');
-ch.initlayers(256,256);
-ch.perlinNoise(0,64,151024000,256,150,8,false);
-ch.embossLayer(0,0);
-ch.adjustLayerRGB(0,0,-40,-35,-50);
-ch.blobsLayer(1,431371456,16,false);
-ch.edgeVLayer(1,1);
-ch.sineDistort(1,1,0.0480000004172325,81,-0.0509999990463257,154);
-ch.embossLayer(1,1);
-ch.invertLayer(1,1);
-ch.blurLayer(1,1);
-ch.perlinNoise(2,128,9876543,256,150,8,false);
-ch.sineDistort(2,2,0.100000001490116,25,0.125,20);
-ch.mulLayers(0,1,4,1,1);
-ch.addLayers(4,2,4,1,0.259999990463257);
-ch.writeCanvas();
-
-
-
-ch = new Chromanin(256,'canvas5');
-ch.initlayers(256,256);
-ch.blobsLayer(0,303525728,9,false);
-ch.tileLayer(0,0);
-ch.adjustLayerRGB(0,0,-50,-50,-50);
-ch.twirlLayer(0,0,200,2000);
-ch.invertLayer(0,0);
-ch.addLayers(0,1,4,1,1);
-ch.writeCanvas();
-
-
-
-ch = new Chromanin(256,'canvas6');
-ch.initlayers(256,256);
-ch.sinePlasma(0,0.25,0.0900000035762787,256);
-ch.woodLayer(0,0,2);
-ch.erodeLayer(0,0);
-ch.erodeLayer(0,0);
-ch.moveDistort(0,0,128,255);
-ch.embossLayer(0,0);
-ch.invertLayer(0,0);
-ch.blurLayer(0,0);
-ch.perlinNoise(1,128,9876543,256,150,8,false);
-ch.perlinNoise(2,128,9876543,256,150,8,true);
-ch.addLayers(0,1,4,1,0.219999998807907);
-ch.addLayers(4,2,4,1,0.150000005960464);
-ch.addLayers(4,3,4,1,1);
-ch.writeCanvas();
-
-</script>
-</body>
-</html>
+</body></html>
