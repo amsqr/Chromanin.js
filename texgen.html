@@ -1,18 +1,561 @@
-<!DOCTYPE html>
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
-    <title>Loading, please wait</title>
+<html>
+<head>
+<script src="TextureGenerator.js"></script>
+<script>
 
-    <script type="text/javascript">
-        var i=0;
- 	var res=0;
+/*
+
+ Chromanin 
+ 
+ Copyright (C) 2012 Alejandro Mosquera <amsqr2@gmail.com>
+ 
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, version 3 of the License.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ 
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+*/
+
+
+
+</script>
+ <meta charset=utf-8 />
+
+	<META NAME="Description" CONTENT="JavaScript Procedural Texture Generation">
+
+
+
+<META NAME="Keywords" CONTENT="JavaScript, Procedural, Texture, Generation">
+
+
+
+<META NAME="distribution" CONTENT="Global">
+
+
+
+<META NAME="Robots" CONTENT="INDEX,FOLLOW">
+
+
+
+    <title>Chromanin.js, a JavaScript Procedural Texture Generation Library</title>
+
+ <style> 
+
+
+
+  	
+
+
+
+   #dashboard{
+
+
+
+ 
+
+
+
+  height:45px;
+
+
+
+ top:20px;
+
+
+
+  left:10px;
+
+
+
+  right:10px;
+
+
+
+  background:#000000  36px 8px no-repeat;
+
+
+
+  border-radius:4px;
+
+
+
+  padding:2px 0 0 0;
+
+  color: #ffffff;
+
+
+
+  font-size: 1.5em;line-height: 1.25;text-align: center;
+
+
+
+  }
+
+  #wrapper {
+
+
+
+  width: 100%;
+
+
+
+  min-width: 1320px;
+
+
+
+}
+
+
+
+   </style> 
+
+   
+</head>
+<body>
+<div id="dashboard">
+
+
+
+		Chromanin.js, a JavaScript Procedural Texture Generation Library (ams<a href="http://www.google.com/recaptcha/mailhide/d?k=01DruT4lsNm3ZlQarc_G8HmA==&amp;c=M3nDxqmfXC-rKWHNvMp2gXJihe3nkLgVs6DVZuafx9E=" onclick="window.open('http://www.google.com/recaptcha/mailhide/d?k\07501DruT4lsNm3ZlQarc_G8HmA\75\75\46c\75M3nDxqmfXC-rKWHNvMp2gXJihe3nkLgVs6DVZuafx9E\075', '', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=500,height=300'); return false;" title="Reveal this e-mail address">...</a>@gmail.com) 
+
+<canvas id="loading" width="1200" height="25"></canvas>
+		</div>
+
+
+
+  <div id = "wrapper">
+
+<br> </br>
+ 
+<br> </br>
+
+<table >
+ 
+  <tr>
+  <td>
+  
+<canvas id="canvas1" width="256" height="256"></canvas>
+<p style="float:left;width:255px;font-size: xx-small">
+ch = new Chromanin(256,'canvas1');
+ch.initlayers(256,256);
+ch.colorLayer(0,255,0,0);
+ch.cellMachine(1,1234,99);
+ch.kaleidLayer(1,1,1);
+ch.tileLayer(1,1);
+ch.tileLayer(1,1);
+ch.tileLayer(1,1);
+ch.addLayers(0,1,4,1,1);
+ch.writeCanvas();</p>
+</td>
+<td>
+<canvas id="canvas2" width="256" height="256"></canvas>
+<p style="float:left;width:255px;font-size: xx-small">
+ch = new Chromanin(256,'canvas2');
+ch.initlayers(256,256);
+ch.initlayers(256,256);
+ch.checkerBoardLayer(0,16,16,255,128,64,0,0,128);
+ch.sineDistort(0,0,0.100000001490116,25,0.125,20);
+ch.addLayers(0,1,4,1,1);
+ch.addLayers(4,2,4,1,1);
+ch.addLayers(4,3,4,1,1);
+ch.writeCanvas();
+</p></td>
+<td>
+<canvas id="canvas3" width="256" height="256"></canvas>
+<p style="float:left;width:255px;font-size: xx-small">
+ch = new Chromanin(256,'canvas3');
+ch.initlayers(256,256);
+ch.perlinNoise(0,128,9876543,256,150,8,true);
+ch.noiseDistort(0,0,1234567,3);
+ch.embossLayer(0,0);
+ch.perlinNoise(1,128,885870016,256,118,8,true);
+ch.scaleLayerRGB(1,1,0.5,0.6,0);
+ch.dilateLayer(1,1);
+ch.dilateLayer(1,1);
+ch.dilateLayer(1,1);
+ch.dilateLayer(1,1);
+ch.dilateLayer(1,1);
+ch.motionBlur(1,1,58);
+ch.perlinNoise(2,128,6666666,256,130,8,false);
+ch.embossLayer(2,2);
+ch.sculptureLayer(2,2);
+ch.mulLayers(0,1,4,1,1);
+ch.addLayers(4,2,4,1,0.0700000002980232);
+ch.writeCanvas();
+</p>
+</td>
+
+<td>
+<canvas id="canvas4" width="256" height="256"></canvas>
+<p style="float:left;width:255px;font-size: xx-small">
+ch = new Chromanin(256,'canvas4');
+ch.initlayers(256,256);
+ch.perlinNoise(0,64,151024000,256,150,8,false);
+ch.embossLayer(0,0);
+ch.adjustLayerRGB(0,0,-40,-35,-50);
+ch.blobsLayer(1,431371456,16,false);
+ch.edgeVLayer(1,1);
+ch.sineDistort(1,1,0.0480000004172325,81,-0.0509999990463257,154);
+ch.embossLayer(1,1);
+ch.invertLayer(1,1);
+ch.blurLayer(1,1);
+ch.perlinNoise(2,128,9876543,256,150,8,false);
+ch.sineDistort(2,2,0.100000001490116,25,0.125,20);
+ch.mulLayers(0,1,4,1,1);
+ch.addLayers(4,2,4,1,0.259999990463257);
+ch.writeCanvas();
+</p>
+</td>
+</tr>
+<tr>
+<td>
+<canvas id="canvas5" width="256" height="256"></canvas>
+<p style="float:left;width:255px;font-size: xx-small">
+ch = new Chromanin(256,'canvas5');
+ch.initlayers(256,256);
+ch.blobsLayer(0,303525728,9,false);
+ch.tileLayer(0,0);
+ch.adjustLayerRGB(0,0,-50,-50,-50);
+ch.twirlLayer(0,0,200,2000);
+ch.invertLayer(0,0);
+ch.addLayers(0,1,4,1,1);
+ch.writeCanvas();
+</p>
+</td>
+<td>
+<canvas id="canvas6" width="256" height="256"></canvas>
+<p style="float:left;width:255px;font-size: xx-small">
+ch = new Chromanin(256,'canvas6');
+ch.initlayers(256,256);
+ch.sinePlasma(0,0.25,0.0900000035762787,256);
+ch.woodLayer(0,0,2);
+ch.erodeLayer(0,0);
+ch.erodeLayer(0,0);
+ch.moveDistort(0,0,128,255);
+ch.embossLayer(0,0);
+ch.invertLayer(0,0);
+ch.blurLayer(0,0);
+ch.perlinNoise(1,128,9876543,256,150,8,false);
+ch.perlinNoise(2,128,9876543,256,150,8,true);
+ch.addLayers(0,1,4,1,0.219999998807907);
+ch.addLayers(4,2,4,1,0.150000005960464);
+ch.addLayers(4,3,4,1,1);
+ch.writeCanvas();
+</p>
+</td>
+
+<td>
+<canvas id="canvas7" width="256" height="256"></canvas>
+<p style="float:left;width:255px;font-size: xx-small">
+
+
+ch = new Chromanin(256,'canvas7');
+ch.initlayers(256,256);
+ch.perlinNoise(0,128,185107136,256,140,5,false);
+ch.edgeVLayer(0,0);
+ch.colorLayer(3,146,85,24);
+ch.addLayers(0,4,4,1,1);
+ch.addLayers(4,2,4,0.600000023841858,1);
+ch.addLayers(4,3,4,1,1);
+ch.writeCanvas();
+</p>
+</td>
+<td>
+<canvas id="canvas8" width="256" height="256"></canvas>
+<p style="float:left;width:255px;font-size: xx-small">
+
+ch = new Chromanin(256,'canvas8');
+ch.initlayers(256,256);
+ch.perlinNoise(0,64,1788537984,256,150,8,false);
+ch.sculptureLayer(0,0);
+ch.adjustLayerRGB(0,0,-25,-10,25);
+ch.perlinNoise(1,64,958198656,256,150,8,false);
+ch.embossLayer(1,1);
+ch.adjustLayerRGB(1,1,25,0,-25);
+ch.perlinNoise(2,64,151024000,256,150,8,false);
+ch.adjustLayerRGB(2,2,25,25,-25);
+ch.mulLayers(0,1,4,1,1);
+ch.mulLayers(4,2,4,1,1);
+ch.addLayers(4,3,4,1,1);
+ch.writeCanvas();
+</p>
+</td>
+</tr>
+<tr>
+<td>
+<canvas id="canvas9" width="256" height="256"></canvas>
+<p style="float:left;width:255px;font-size: xx-small">
+
+ch = new Chromanin(256,'canvas9');
+ch.initlayers(256,256);
+ch.blobsLayer(0,939976064,13,true);
+ch.makeTilable(0,0,128);
+ch.blobsLayer(1,228544464,6,true);
+ch.makeTilable(1,1,128);
+ch.perlinNoise(2,64,801452800,128,127,6,false);
+ch.makeTilable(2,2,128);
+ch.perlinNoise(3,64,163542336,128,109,8,false);
+ch.makeTilable(3,3,128);
+ch.mapDistort(0,1,4,1,1);
+ch.mapDistort(4,2,4,1,1);
+ch.addLayers(4,3,4,1,1);
+ch.writeCanvas();
+</p>
+</td>
+
+<td>
+<canvas id="canvas10" width="256" height="256"></canvas>
+<p style="float:left;width:255px;font-size: xx-small">
+
+ch = new Chromanin(256,'canvas10');
+ch.initlayers(256,256);
+ch.blobsLayer(0,514448384,8,true);
+ch.invertLayer(0,0);
+ch.invertLayer(0,0);
+ch.invertLayer(0,0);
+ch.invertLayer(0,0);
+ch.invertLayer(0,0);
+ch.invertLayer(0,0);
+ch.addLayers(0,1,4,1,1);
+ch.addLayers(4,2,4,1,1);
+ch.addLayers(4,3,4,1,1);
+ch.writeCanvas();
+</p>
+</td>
+
+</tr>
+</table>
+
+<script>
+
+var pbar=0;
+
+function render(sel){
+
+if (sel==1)
+{
+ch = new Chromanin(256,'canvas1');
+ch.initlayers(256,256);
+ch.colorLayer(0,255,0,0);
+ch.cellMachine(1,1234,99);
+ch.kaleidLayer(1,1,1);
+ch.tileLayer(1,1);
+ch.tileLayer(1,1);
+ch.tileLayer(1,1);
+ch.addLayers(0,1,4,1,1);
+ch.writeCanvas();
+}
+if (sel==2)
+{
+ch = new Chromanin(256,'canvas2');
+ch.initlayers(256,256);
+ch.initlayers(256,256);
+ch.checkerBoardLayer(0,16,16,255,128,64,0,0,128);
+ch.sineDistort(0,0,0.100000001490116,25,0.125,20);
+ch.addLayers(0,1,4,1,1);
+ch.addLayers(4,2,4,1,1);
+ch.addLayers(4,3,4,1,1);
+ch.writeCanvas();
+
+}
+if (sel==3)
+{
+ch = new Chromanin(256,'canvas3');
+ch.initlayers(256,256);
+ch.perlinNoise(0,128,9876543,256,150,8,true);
+ch.noiseDistort(0,0,1234567,3);
+ch.embossLayer(0,0);
+ch.perlinNoise(1,128,885870016,256,118,8,true);
+ch.scaleLayerRGB(1,1,0.5,0.6,0);
+ch.dilateLayer(1,1);
+ch.dilateLayer(1,1);
+ch.dilateLayer(1,1);
+ch.dilateLayer(1,1);
+ch.dilateLayer(1,1);
+ch.motionBlur(1,1,58);
+ch.perlinNoise(2,128,6666666,256,130,8,false);
+ch.embossLayer(2,2);
+ch.sculptureLayer(2,2);
+ch.mulLayers(0,1,4,1,1);
+ch.addLayers(4,2,4,1,0.0700000002980232);
+ch.writeCanvas();
+}
+if (sel==4)
+{
+
+
+ch = new Chromanin(256,'canvas4');
+ch.initlayers(256,256);
+ch.perlinNoise(0,64,151024000,256,150,8,false);
+ch.embossLayer(0,0);
+ch.adjustLayerRGB(0,0,-40,-35,-50);
+ch.blobsLayer(1,431371456,16,false);
+ch.edgeVLayer(1,1);
+ch.sineDistort(1,1,0.0480000004172325,81,-0.0509999990463257,154);
+ch.embossLayer(1,1);
+ch.invertLayer(1,1);
+ch.blurLayer(1,1);
+ch.perlinNoise(2,128,9876543,256,150,8,false);
+ch.sineDistort(2,2,0.100000001490116,25,0.125,20);
+ch.mulLayers(0,1,4,1,1);
+ch.addLayers(4,2,4,1,0.259999990463257);
+ch.writeCanvas();
+
+}
+if (sel==5)
+{
+
+ch = new Chromanin(256,'canvas5');
+ch.initlayers(256,256);
+ch.blobsLayer(0,303525728,9,false);
+ch.tileLayer(0,0);
+ch.adjustLayerRGB(0,0,-50,-50,-50);
+ch.twirlLayer(0,0,200,2000);
+ch.invertLayer(0,0);
+ch.addLayers(0,1,4,1,1);
+ch.writeCanvas();
+
+}
+if (sel==6)
+{
+
+ch = new Chromanin(256,'canvas6');
+ch.initlayers(256,256);
+ch.sinePlasma(0,0.25,0.0900000035762787,256);
+ch.woodLayer(0,0,2);
+ch.erodeLayer(0,0);
+ch.erodeLayer(0,0);
+ch.moveDistort(0,0,128,255);
+ch.embossLayer(0,0);
+ch.invertLayer(0,0);
+ch.blurLayer(0,0);
+ch.perlinNoise(1,128,9876543,256,150,8,false);
+ch.perlinNoise(2,128,9876543,256,150,8,true);
+ch.addLayers(0,1,4,1,0.219999998807907);
+ch.addLayers(4,2,4,1,0.150000005960464);
+ch.addLayers(4,3,4,1,1);
+ch.writeCanvas();
+
+}
+if (sel==7)
+{
+
+ch = new Chromanin(256,'canvas7');
+ch.initlayers(256,256);
+ch.perlinNoise(0,128,185107136,256,140,5,false);
+ch.edgeVLayer(0,0);
+ch.colorLayer(3,146,85,24);
+//ch.colorLayer(4,0,0,0);
+ch.addLayers(0,4,4,1,1);
+ch.addLayers(4,2,4,0.600000023841858,1);
+ch.addLayers(4,3,4,1,1);
+ch.writeCanvas();
+
+}
+if (sel==8)
+{
+
+ch = new Chromanin(256,'canvas8');
+ch.initlayers(256,256);
+ch.perlinNoise(0,64,1788537984,256,150,8,false);
+ch.sculptureLayer(0,0);
+ch.adjustLayerRGB(0,0,-25,-10,25);
+ch.perlinNoise(1,64,958198656,256,150,8,false);
+ch.embossLayer(1,1);
+ch.adjustLayerRGB(1,1,25,0,-25);
+ch.perlinNoise(2,64,151024000,256,150,8,false);
+ch.adjustLayerRGB(2,2,25,25,-25);
+ch.mulLayers(0,1,4,1,1);
+ch.mulLayers(4,2,4,1,1);
+ch.addLayers(4,3,4,1,1);
+ch.writeCanvas();
+
+}
+if (sel==9)
+{
+ch = new Chromanin(256,'canvas9');
+ch.initlayers(256,256);
+ch.blobsLayer(0,939976064,13,true);
+ch.makeTilable(0,0,128);
+ch.blobsLayer(1,228544464,6,true);
+ch.makeTilable(1,1,128);
+ch.perlinNoise(2,64,801452800,128,127,6,false);
+ch.makeTilable(2,2,128);
+ch.perlinNoise(3,64,163542336,128,109,8,false);
+ch.makeTilable(3,3,128);
+ch.mapDistort(0,1,4,1,1);
+ch.mapDistort(4,2,4,1,1);
+ch.addLayers(4,3,4,1,1);
+ch.writeCanvas();
+}
+if (sel==10)
+{
+
+ch = new Chromanin(256,'canvas10');
+ch.initlayers(256,256);
+ch.blobsLayer(0,514448384,8,true);
+ch.invertLayer(0,0);
+ch.invertLayer(0,0);
+ch.invertLayer(0,0);
+ch.invertLayer(0,0);
+ch.invertLayer(0,0);
+ch.invertLayer(0,0);
+ch.addLayers(0,1,4,1,1);
+ch.addLayers(4,2,4,1,1);
+ch.addLayers(4,3,4,1,1);
+ch.writeCanvas();
+}
+}
+
+		var i=0;
+		var res=0;
+		var res2=0;
 		var context;
 		var sizex;
 		var sizey;
 		var total_width;
+		var pbar=0;
+		
+		function progress() {
+		
+			
+			i=i+1;
+			pbar=pbar+100;
+            render(i);
+            rectangle(pbar);
+			if (i==10)
+			{
+			   window.clearInterval(res2);
+			}
+			
+			
+			}
+			
+			
+		function rectangle(i)
+		{
+		
+		context.fillStyle = "black";
+		context.fillRect(0,0,sizex,sizey);
+		
+		context.fillStyle = "white";
+		context.beginPath();
+		context.rect(sizex/10, ((sizey+(sizey/15))/2)-(sizey/15), 1+i, sizey/15);
+		context.closePath();
+		context.fill();
+		
+		
+		}
 		
         window.onload = function() {
-            var elem = document.getElementById('myCanvas');
+            var elem = document.getElementById('loading');
             if (!elem || !elem.getContext) {
                 return;
             }
@@ -31,37 +574,15 @@
 			context.lineWidth  = 3;
 			context.fill();
 			
-			draw();
-            res = setInterval(draw, 30);
+			res2=self.setInterval("progress()",10);
+            
         }
-
-        function draw() {
-            i+=1;
-            rectangle(i)
-			
-			if (i>=total_width) {
-                clearInterval(res);
-            }
-            }
+		
+		
         
 
-		function rectangle(i)
-		{
-		context.fillStyle = "white";
-		context.beginPath();
-		context.rect(sizex/10, ((sizey+(sizey/15))/2)-(sizey/15), 1+i, sizey/15);
-		context.closePath();
-		context.fill()
-		}
-    </script>
+</script>
+</div>
+</body>
+</html>
 
-</head>
-<body>
-   
-    <p>
-        <canvas id="myCanvas" width="800" height="600">Your browser does not have support for canvas.</canvas>
-    </p>
-
-
-
-</body></html>
