@@ -414,10 +414,10 @@ Chromanin.prototype.particle= function particle( l,  f)
 		{
 			offset=y*this.layerSizeX+x;
 			nx=x/(this.layerSizeX>>1)-1;
-			r=255-f*sqrt(nx*nx+ny*ny);
+			r=255-f*Math.sqrt(nx*nx+ny*ny);
 			if (r<0) r=0;
 			if (r>255) r=255;
-			this.layers[l][offset].r=this.layers[l][offset].g=this.layers[l][offset].b=r;
+			this.layers[l][offset].r=this.layers[l][offset].g=this.layers[l][offset].b=(r);
 		}
 	}
 }
@@ -462,8 +462,8 @@ Chromanin.prototype.blobsLayer= function blobsLayer( l,  seed,  amount,  rgb)
 
 	for ( v=0; v<amount; v++)
 	{
-		blobX[v]=getlo(myrshift(getlo(myRandom()*this.layerSizeX),8)&this.andLayerSizeX);
-		blobY[v]=getlo(myrshift(getlo(myRandom()*this.layerSizeY),8)&this.andLayerSizeY);
+		blobX[v]=getlo(getlo(myRandom())&this.andLayerSizeX);
+		blobY[v]=getlo(getlo(myRandom())&this.andLayerSizeY);
 		blobR[v]=(getlo(myRandom()&255)/255+0.1)*150;
 		if (rgb==true)
 		{
