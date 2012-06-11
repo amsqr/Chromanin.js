@@ -1405,12 +1405,12 @@ Chromanin.prototype.tunnelDistort= function tunnelDistort( src,  dest,  f)
 			if (a!=0)
 			{
 				a=1/a;
-				arct=aMath.tan(b*a);
+				arct=Math.atan(b*a);
 				if (a>0)
 					na=lsd2p*arct+this.layerSizeX/2;
 				else
 					na=lsd2p*arct;
-				nb=fabs(Math.cos(arct)*f*a);
+				nb=Math.abs(Math.cos(arct)*f*a);
 				ina=na;
 				inb=nb;
 				inap1=(ina+1)&this.andLayerSizeX;
