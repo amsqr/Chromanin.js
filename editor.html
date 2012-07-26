@@ -1,0 +1,340 @@
+<html>
+<head>
+<script src="editor.js"></script>
+<script src="DAT.GUI.min.js"></script>
+<script>
+
+/*
+
+ Chromanin 
+ 
+ Copyright (C) 2012 Alejandro Mosquera <amsqr2@gmail.com>
+ 
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, version 3 of the License.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ 
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+*/
+
+
+
+</script>
+ <meta charset=utf-8 />
+
+	<META NAME="Description" CONTENT="JavaScript Procedural Texture Generation">
+
+
+
+<META NAME="Keywords" CONTENT="JavaScript, Procedural, Texture, Generation">
+
+
+
+<META NAME="distribution" CONTENT="Global">
+
+
+
+<META NAME="Robots" CONTENT="INDEX,FOLLOW">
+
+
+
+    <title>Chromanin.js Editor, a JavaScript Procedural Texture Generation Library</title>
+
+ <style> 
+
+
+
+   #dashboard{
+
+
+
+ 
+
+
+
+  height:45px;
+
+
+
+ top:20px;
+
+
+
+  left:10px;
+
+
+
+  right:10px;
+
+
+
+  background:#000000  36px 8px no-repeat;
+
+
+
+  border-radius:4px;
+
+
+
+  padding:2px 0 0 0;
+
+  color: #ffffff;
+
+
+
+  font-size: 1.5em;line-height: 1.25;text-align: center;
+
+
+
+  }
+
+ 
+ 
+
+ #wcontrol {
+
+
+
+  width: 100%;
+
+
+
+  min-width: 1320px;
+
+
+
+}
+
+
+   </style> 
+
+   
+</head>
+<body bgcolor ="grey">
+<div id="dashboard">
+
+
+
+		Chromanin.js Editor Preview (0.1a) - JavaScript Procedural Texture Generation - <a href="http://amsqr.blogspot.com">amsqr.blogspot.com</a> 
+
+		</div>
+
+
+<br> </br>
+ 
+
+
+  <div id = "wcontrol">
+ <div id="left" style="  float: left; width: 270px; height:500;">
+ 
+ </div>
+	<div id="middle" style=" float: left; width: 400px;">
+	
+  <strong style="color: white;">Result</strong>
+<canvas id="canvas" width="256" height="256" style="border: solid 4px #0000FF;"></canvas>
+<p></p>
+ <input type="submit" value="Run" onclick="evalua()"/>
+  <input type="submit" value="Clear" onclick="clearsrc()" />
+ <input type="submit" value="Help" onclick="help()" />
+  <input type="submit" value="About" onclick="about()" />
+  <textarea id="source" style="width:400;height:250;background-color: lightgrey;"></textarea> 
+ 
+	</div>
+	<table >
+ 
+    <div id="right" style=" float: right; width: 300px;">
+	<tr>   
+
+	<td><strong style="color: white;">layer0</strong>
+<canvas id="ch_canvas_tmp0" width="256" height="256" style="border: solid 4px #000000;"></canvas></td>
+ 
+<td>
+<strong style="color: white;">layer1</strong>
+<canvas id="ch_canvas_tmp1" width="256" height="256" style="border: solid 4px #000000;"></canvas>
+
+</td>
+</tr>
+<tr>
+<td><strong style="color: white;">layer2</strong>
+<canvas id="ch_canvas_tmp2" width="256" height="256" style="border: solid 4px #000000;"></canvas>
+
+</td>
+
+
+<td><strong style="color: white;">layer3</strong>
+<canvas id="ch_canvas_tmp3" width="256" height="256" style="border: solid 4px #000000;"></canvas>
+
+</td>
+</tr>
+</table>
+	</div>
+
+	  
+
+ 
+ 
+  </div>
+  
+  
+<script>
+
+function clearsrc()
+{
+document.getElementById("source").value="\
+ch = new Chromanin(256,'canvas'); \
+ch.initlayers(256,256); \
+ch.addLayers(0,1,4,1,1); \
+ch.writeCanvas();"
+eval(document.getElementById("source").value);
+}
+
+function evalua()
+{
+eval(document.getElementById("source").value);
+}
+
+function help(){ alert('Nothing yet!');}
+
+function about(){alert('About this :)');}
+
+
+var stack = new Array();
+
+
+var EffectController = function() {
+                //this.ActiveLayer='layer0';
+			    this.Wood=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.woodLayer( src,  dest,  b);';};
+			    this.Blur=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.blurLayer( src,  dest);'};
+				this.Sharpen=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.sharpenLayer( src,  dest);'};
+				this.HEdge=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.edgeHLayer( src,  dest);'};
+				this.VEdge=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.edgeVLayer( src,  dest);'};
+				this.MotionBlur=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.motionBlur( src,  dest,  s);'};
+				this.MakeTile=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.tileLayer( src,  dest);'};
+				this.ScaleRGB=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.scaleLayerRGB( src,  dest,  r,  g,  b);'};
+				this.AdjustRGB=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.adjustLayerRGB( src,  dest,  r,  g,  b);'};
+				this.SineRGB=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.sineLayerRGB( src,  dest,  r,  g,  b);'};
+				this.Invert=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.invertLayer( src,  dest);'};
+				this.MedianCut=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.medianLayer( src,  dest);'};
+				this.Dilate=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.dilateLayer( src,  dest);'};
+				this.Erode=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.erodeLayer( src,  dest);'};
+				this.Sculpt=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.sculptureLayer( src,  dest);'};
+				this.Sine=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.sineLayerRGB( src,  dest,  r,  g,  b);'};
+				this.Twirl=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.twirlLayer( src,  dest,  rot,  scale);'};
+				this.Tile=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.tileLayer( src,  dest);'};
+				this.Kaleido=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.kaleidLayer( src,  dest,  corner);'};
+				this.Noise=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.noiseDistort( src,  dest,  seed,  radius);'};
+				this.MoveXY=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.moveDistort( src,  dest,  dx,  dy);'};
+				this.Tunnel=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.tunnelDistort( src,  dest,  f);'};
+				this.SubPlasma=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.subPlasma(l, dist, seed, amplitude,  rgb);'};
+				this.SinePlasma=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.sinePlasma(l, dx,  dy,  amplitude);'};
+				this.PerlinNoise=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.perlinNoise( l,  dist,  seed,  amplitude,  persistence,  octaves,  rgb);'};
+				this.ParticleCorona=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.particle( l,  f);'};
+				this.SolidColor=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.colorLayer( l,  r,  g,  b);'};
+				this.CheckerBoard=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.checkerBoardLayer( l,  dx,  dy,  r1,  g1,  b1,  r2,  g2,  b2);'};
+				this.Blobs=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.blobsLayer( l,  seed,  amount,  rgb);'};
+				this.Emboss=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.embossLayer( src,  dest);'};
+				this.CellMachine=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.cellMachine(l,seed,rule);'};
+				this.AddLayers=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.addLayers( src1,  src2,  dest,  perc1,  perc2);'};
+				this.MulLayers=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.mulLayers( src1,  src2,  dest,  perc1,  perc2);'};
+				this.XorLayers=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.xorLayers( src1,  src2,  dest,  perc1,  perc2);'};
+				this.AndLayers=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.andLayers( src1,  src2,  dest,  perc1,  perc2);'};
+				this.OrLayers=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.orLayers( src1,  src2,  dest,  perc1,  perc2);'};
+				this.RandCombineLayers=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.randCombineLayers( src1,  src2,  dest,  perc1,  perc2);'};
+				this.MaxCombineLayers=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.maxCombineLayers( src1,  src2,  dest,  perc1,  perc2);'};
+				this.MinCombineLayers=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.minCombineLayers( src1,  src2,  dest,  perc1,  perc2);'};
+				
+			   
+			 
+				
+			};
+
+           var effectController =  new EffectController();
+		   
+
+		   
+				//Filter
+				var gui = new dat.GUI({autoplace:false, width: 240, height:500});
+				//gui.add(effectController, 'ActiveLayer').options( 'layer0', 'layer1', 'layer2', 'layer3', 'layer4' );
+				gui.add(effectController,'Wood');
+				gui.add(effectController,'Blur');
+				gui.add(effectController,'Sharpen');
+				gui.add(effectController,'HEdge');
+				gui.add(effectController,'VEdge');
+				gui.add(effectController,'MotionBlur');
+				gui.add(effectController,'MakeTile');
+				gui.add(effectController,'ScaleRGB');
+				gui.add(effectController,'AdjustRGB');
+				gui.add(effectController,'SineRGB');
+				gui.add(effectController,'Invert');
+				gui.add(effectController,'MedianCut');
+				gui.add(effectController,'Dilate');
+				gui.add(effectController,'Erode');
+				gui.add(effectController,'Sculpt');
+				gui.add(effectController,'Sine');
+				gui.add(effectController,'Twirl');
+				gui.add(effectController,'Tile');
+				gui.add(effectController,'Kaleido');
+				gui.add(effectController,'Noise');
+				gui.add(effectController,'MoveXY');
+				gui.add(effectController,'Tunnel');
+				gui.add(effectController,'SubPlasma');
+				gui.add(effectController,'SinePlasma');
+				gui.add(effectController,'PerlinNoise');
+				gui.add(effectController,'ParticleCorona');
+				gui.add(effectController,'SolidColor');
+				gui.add(effectController,'CheckerBoard');
+				gui.add(effectController,'Blobs');
+				gui.add(effectController,'Emboss');
+				gui.add(effectController,'CellMachine');
+				gui.add(effectController,'AddLayers');
+				gui.add(effectController,'MulLayers');
+				gui.add(effectController,'XorLayers');
+				gui.add(effectController,'AndLayers');
+				gui.add(effectController,'OrLayers');
+				gui.add(effectController,'RandCombineLayers');
+				gui.add(effectController,'MaxCombineLayers');
+				gui.add(effectController,'MinCombineLayers');
+			
+				mydiv=document.getElementById('left');
+				mydiv.appendChild(gui.domElement);
+				
+				
+document.getElementById("source").value=" \
+ch = new Chromanin(256,'canvas'); \
+ch.initlayers(256,256); \
+ch.checkerBoardLayer(0,16,16,255,128,64,0,0,128); \
+ch.sineDistort(0,0,0.100000001490116,25,0.125,20); \
+ch.colorLayer( 1,  20,  20,  150); \
+ch.addLayers(0,1,4,1,1); \
+ch.randCombineLayers(1,  0,  3,  0.5,  0.2); \
+ch.twirlLayer( 3,  2,  2, 2); \
+ch.tunnelDistort( 3,  1,  1); \
+ch.erodeLayer( 3,  3); \
+ch.invertLayer( 0, 0); \
+ch.motionBlur( 2,  2,  3); \
+ch.tileLayer(2, 2); \
+ch.kaleidLayer( 2,  2,  3); \
+ch.embossLayer(0,  0); \
+ch.blurLayer( 0,  0); \
+ch.sculptureLayer( 3, 3); \
+ch.mulLayers(0,1,4,1,1); \
+ch.maxCombineLayers(4,2,4,1,1); \
+ch.orLayers(4,3,4,1,1); \
+ch.woodLayer( 3,  3,  1); \
+ch.invertLayer( 0,  0); \
+ch.dilateLayer(3, 3); \
+ch.sharpenLayer( 4,  4); \
+ch.writeCanvas();"
+eval(document.getElementById("source").value);
+
+</script>
+
+</body>
+</html>

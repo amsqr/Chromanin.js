@@ -56,19 +56,22 @@ Chromanin.prototype.writeCanvas= function writeCanvas()
 {
     var skel = "ch_canvas_tmp";
 	
-	for (var i=0; i<this.MAX_LAYERS+1; i++)
+	for (var i=0; i<this.MAX_LAYERS; i++)
 	{
 	    ref = null;
 		if (i==4) 
 		{
 			ref = document.getElementById(this.outcanvas);
-		/*}
+		}
 		else
 		{
 			ref = document.getElementById(skel+i);
 			//alert(skel+i);
 		}
-		*/
+		
+		if (i<=4)
+		{
+		
 		ctx = ref.getContext('2d');
 		this.imageData = ctx.createImageData(this.layerSizeX, this.layerSizeY);
 		//alert(i);
@@ -87,7 +90,7 @@ Chromanin.prototype.writeCanvas= function writeCanvas()
 		
 		
 	    ctx.putImageData(this.imageData, 0, 0); 
-	}
+	  }
 	
 	}
     
@@ -1017,8 +1020,8 @@ Chromanin.prototype.makeTilable= function makeTilable( src,  dest,  s)
 
 function median(v)
 {
-	 a[5];
-	 i, j, last;
+	 var a= Array(5);
+	 var i, j, last;
 	//memset(a, 0, 5);
 	for (i=0; i<9; i++)
 	{
@@ -1580,6 +1583,7 @@ Chromanin.prototype.mulLayers= function mulLayers( src1,  src2,  dest,  perc1,  
 		this.layers[dest][v].b=b;
 	}
 }
+
 
 Chromanin.prototype.xorLayers= function xorLayers( src1,  src2,  dest,  perc1,  perc2)
 {
