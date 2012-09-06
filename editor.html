@@ -2,6 +2,7 @@
 <head>
 <script src="editor.js"></script>
 <script src="dat.gui.min.js"></script>
+<script src="beautify.js"></script>
 <script>
 
 /*
@@ -197,6 +198,7 @@ eval(document.getElementById("source").value);
 
 function evalua()
 {
+document.getElementById("source").value=js_beautify(document.getElementById("source").value);
 eval(document.getElementById("source").value);
 }
 
@@ -249,7 +251,7 @@ var EffectController = function() {
 				this.RandCombineLayers=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.randCombineLayers( src1,  src2,  dest,  perc1,  perc2);'};
 				this.MaxCombineLayers=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.maxCombineLayers( src1,  src2,  dest,  perc1,  perc2);'};
 				this.MinCombineLayers=function(){document.getElementById("source").value=document.getElementById("source").value+'ch.minCombineLayers( src1,  src2,  dest,  perc1,  perc2);'};
-				
+				document.getElementById("source").value=js_beautify(document.getElementById("source").value);
 			   
 			 
 				
@@ -332,6 +334,7 @@ ch.invertLayer( 0,  0); \
 ch.dilateLayer(3, 3); \
 ch.sharpenLayer( 4,  4); \
 ch.writeCanvas();"
+document.getElementById("source").value=js_beautify(document.getElementById("source").value);
 eval(document.getElementById("source").value);
 
 </script>
